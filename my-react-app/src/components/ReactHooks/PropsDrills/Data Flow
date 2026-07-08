@@ -1,0 +1,47 @@
+App
+
+Creates user
+
+↓
+
+Dashboard
+
+Receives user
+
+↓
+
+Does NOT use it
+
+↓
+
+Passes user
+
+↓
+
+Profile
+
+Receives user
+
+↓
+
+Does NOT use it
+
+↓
+
+Passes user
+
+↓
+
+UserInfo
+
+Receives user
+
+↓
+
+Uses user.name
+
+Uses user.role
+
+↓
+
+Displays UI
