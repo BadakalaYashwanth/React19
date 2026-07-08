@@ -1,4 +1,4 @@
-import Search from "./components/ReactHooks/useTransition"
+import Search from "./components/ReactHooks/useDeferredValue"
 
 function App() {
 
