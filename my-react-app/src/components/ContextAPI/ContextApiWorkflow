@@ -1,0 +1,396 @@
+==========================
+CONTEXT API DATA FLOW
+==========================
+
+                    App.js
+                       │
+                       │
+        Creates the user object
+                       │
+                       ▼
+             UserContext.Provider
+        value = { name, role }
+                       │
+                       │
+         Shares data with all child components
+                       │
+                       ▼
+                 Dashboard.js
+                       │
+                       │
+      Does NOT receive or pass any props
+                       │
+                       ▼
+                  Profile.js
+                       │
+                       │
+      Does NOT receive or pass any props
+                       │
+                       ▼
+                 UserInfo.js
+                       │
+                       │
+       useContext(UserContext)
+                       │
+                       ▼
+   React finds the nearest Provider
+                       │
+                       ▼
+        Returns the user object
+                       │
+                       ▼
+      Display name and role on the UI
+
+
+==========================
+STEP BY STEP FLOW
+==========================
+
+Step 1
+
+UserContext.js
+
+createContext()
+
+↓
+
+Creates an empty Context object
+
+↓
+
+Exports UserContext
+
+Purpose
+
+Creates a shared container that stores shared data.
+
+
+--------------------------------------------------
+
+Step 2
+
+App.js
+
+Creates User Object
+
+↓
+
+user
+
+↓
+
+<UserContext.Provider value={user}>
+
+Purpose
+
+Stores the data that should be shared with all child components.
+
+
+--------------------------------------------------
+
+Step 3
+
+UserContext.Provider
+
+Receives
+
+value={user}
+
+↓
+
+Makes the user object available
+
+↓
+
+To every child component
+
+Purpose
+
+Acts as the data provider for the component tree.
+
+
+--------------------------------------------------
+
+Step 4
+
+Dashboard.js
+
+Receives Nothing
+
+↓
+
+Passes Nothing
+
+↓
+
+Simply renders Profile
+
+Purpose
+
+Acts as a normal component.
+
+No prop drilling.
+
+
+--------------------------------------------------
+
+Step 5
+
+Profile.js
+
+Receives Nothing
+
+↓
+
+Passes Nothing
+
+↓
+
+Simply renders UserInfo
+
+Purpose
+
+Acts as a normal component.
+
+No prop drilling.
+
+
+--------------------------------------------------
+
+Step 6
+
+UserInfo.js
+
+useContext(UserContext)
+
+↓
+
+React searches upward
+
+↓
+
+Finds UserContext.Provider
+
+↓
+
+Reads value={user}
+
+↓
+
+Returns user object
+
+↓
+
+Display
+
+user.name
+
+user.role
+
+Purpose
+
+Consumes the shared data directly.
+
+
+==========================
+COMPLETE INTERNAL FLOW
+==========================
+
+Application Starts
+
+↓
+
+UserContext Created
+
+↓
+
+App Executes
+
+↓
+
+Creates User Object
+
+↓
+
+Provider Receives User Object
+
+↓
+
+Provider Stores User Object
+
+↓
+
+Dashboard Renders
+
+↓
+
+Profile Renders
+
+↓
+
+UserInfo Renders
+
+↓
+
+useContext(UserContext)
+
+↓
+
+React Searches Upward
+
+↓
+
+Nearest Provider Found
+
+↓
+
+Reads value={user}
+
+↓
+
+Returns User Object
+
+↓
+
+UserInfo Receives Data
+
+↓
+
+Displays Data
+
+↓
+
+Browser Shows UI
+
+
+==========================
+HOW REACT FINDS THE CONTEXT
+==========================
+
+UserInfo
+
+↓
+
+Needs UserContext
+
+↓
+
+Looks at Parent
+
+(Profile)
+
+↓
+
+Provider Not Found
+
+↓
+
+Looks at Parent
+
+(Dashboard)
+
+↓
+
+Provider Not Found
+
+↓
+
+Looks at Parent
+
+(App)
+
+↓
+
+UserContext.Provider Found
+
+↓
+
+Reads value={user}
+
+↓
+
+Returns User Object
+
+
+==========================
+BEFORE CONTEXT API
+==========================
+
+App
+
+↓
+
+Dashboard(user)
+
+↓
+
+Profile(user)
+
+↓
+
+UserInfo(user)
+
+Every component receives and forwards the user prop.
+
+This is called Prop Drilling.
+
+
+==========================
+AFTER CONTEXT API
+==========================
+
+                 UserContext
+                      │
+                      ▼
+              Provider (App)
+                      │
+          ┌───────────┴───────────┐
+          │                       │
+     Dashboard               Other Components
+          │
+          ▼
+       Profile
+          │
+          ▼
+      UserInfo
+          │
+          ▼
+ useContext(UserContext)
+          │
+          ▼
+  Reads Shared Data Directly
+
+
+==========================
+MEMORY TRICK
+==========================
+
+createContext()
+
+↓
+
+Provider Shares Data
+
+↓
+
+Child Calls useContext()
+
+↓
+
+React Searches Upward
+
+↓
+
+Nearest Provider Found
+
+↓
+
+Reads value
+
+↓
+
+Returns Shared Data
+
+↓
+
+Component Displays the Data
