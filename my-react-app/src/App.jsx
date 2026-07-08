@@ -1,10 +1,10 @@
-import Render from "./components/ReactHooks/Render"
+import Search from "./components/ReactHooks/useDeferredValue"
 
 function App() {
 
     return (
         <div className="d-flex flex-column gap-4 p-4">
-            <Render />
+            <Search />
         </div>
     )
 }
