@@ -1,4 +1,4 @@
-import Search from "./components/ReactHooks/useDeferredValue"
+import Search from "./components/LiftingStateUp/ParentComponent"
 
 function App() {
 
