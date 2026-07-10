@@ -1,4 +1,6 @@
 import useCounter from "./components/type/CustomHook/useCounter";
+import UnionTypesApp from "./components/type/UnionTypes/App";
+import UnionTypesExampleApp from "./components/type/UnionTypes/Example/App";
 
 function App() {
     const { count, increment, decrement } = useCounter(0);
@@ -14,6 +16,16 @@ function App() {
                     Decrement
                 </button>
             </div>
+            
+            <hr className="w-100" />
+            
+            <h3>Union Types Buttons</h3>
+            <UnionTypesApp />
+            
+            <hr className="w-100" />
+            
+            <h3>Union Types User Example</h3>
+            <UnionTypesExampleApp />
         </div>
     );
 }
