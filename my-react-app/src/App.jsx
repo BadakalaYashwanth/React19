@@ -1,10 +1,10 @@
-import RegisterForm from "./components/handleValidation";
+import Modern from "./components/ModernReactForm/app";
 
 function App() {
 
     return (
         <div className="d-flex flex-column gap-4 p-4">
-            <RegisterForm />
+            <Modern />
         </div>
     )
 }
